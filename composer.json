@@ -1,0 +1,13 @@
+{
+    "name": "ikkez/f3-events",
+    "description": "Sweet event system for the PHP Fat-Free Framework",
+    "keywords": ["F3","fatfree","event"],
+    "homepage": "https://github.com/ikkez/f3-events",
+    "license": "GPL-3.0",
+    "autoload": {
+        "classmap": ["lib/"]
+    },
+    "require": {
+      "bcosca/fatfree-core": "3.*"
+    }
+}
