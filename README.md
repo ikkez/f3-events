@@ -29,14 +29,14 @@ This event system is **experimental**, so please handle with care.
 
 The Event class is a child of Prefab, so you can get it everywhere like this:
 
-```
+```php
 // fetch the global Event instance
 $events = \Event::instance();
 ```
 
 Define a listener / hook:
 
-```
+```php
 // typical F3 callstring
 $events->on('user_login', 'Notification->user_login');
 // or with callbacks
@@ -47,13 +47,13 @@ $events->on('user_login', function(){
 
 Send an event:
 
-```
+```php
 $events->emit('user_login');
 ```
 
 Send payload with event:
 
-```
+```php
 $events->on('user_login', function($username){
   \Logger::log($username.' logged in');
 });
@@ -62,7 +62,7 @@ $events->emit('user_login', 'freakazoid');
 
 Multiple listeners with prioritization:
 
-```
+```php
 $events->on('user_login', function($username){
   \Logger::log($username.' logged in');
 }, 10); // 10 is default priority
@@ -74,7 +74,7 @@ $events->emit('user_login', 'freakazoid');
 
 Stop the event chain:
 
-```
+```php
 $events->on('user_login', function($username){
   \Logger::log($username.' logged in');
 });
@@ -88,7 +88,7 @@ $events->emit('user_login', 'freakazoid');
 
 Additional event context data:
 
-```
+```php
 $events->on('user_login', function($username,$context){
   if ($context['lang'] == 'en')
     \Flash::addMessage('You have logged in successfully');
@@ -100,7 +100,7 @@ $events->emit('user_login', 'freakazoid', array('lang'=>'en'));
 
 Additional listener options:
 
-```
+```php
 $events->on('user_login', function($username,$context,$event){
   \Flash::addMessage('You have logged in successfully', $event['options']['type']);
 }, 20, array('type'=>'success'));
@@ -110,7 +110,7 @@ I think that are the basic usage samples that could fit the most cases. Neverthe
 
 
 Filter payload:
-```
+```php
 $events->on('get_total', function($basket){
   $sum = 0;
   foreach($basket as $prod) {
@@ -131,7 +131,7 @@ echo $sum; // 25
 
 Add a sub-event. These are called after the parent event. Listeners and sub-events follow the FIFO processing, which means the first that is registered is the first that will be called.
 
-```
+```php
 $events->on('get_total.tax', function($sum){
   return $sum+($sum*0.2);
 });
@@ -144,7 +144,7 @@ echo $sum; // 35
 
 Remove hooks:
 
-```
+```php
 $events->off('get_total.tax');
 $sum = $events->emit('get_total',$products);
 echo $sum; // 30
@@ -152,7 +152,7 @@ echo $sum; // 30
 
 There is also a mechanic build in which supports local events for mappers and such, which have implemented it:
 
-```
+```php
 $user = new \Model\User();
 $events->watch($user)->on('update.email','\Mailer->sendEmailActivationLink');
 ```
