@@ -14,7 +14,7 @@ class Case3 extends \App\Controller {
 	function get($f3) {
 
 		$tests = new \Test();
-		$events = \Event::instance();
+		$events = \Sugar\Event::instance();
 		$mail = new Mailer();
 
 		$user = array(
@@ -55,7 +55,7 @@ class Mailer {
 		$events;
 
 	function __construct() {
-		$this->events = \Event::instance();
+		$this->events = \Sugar\Event::instance();
 
 		$this->events->on('mail',function($data,$context){
 			//mail($context['mail'],$context['subject'],$data)

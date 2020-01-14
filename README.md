@@ -10,7 +10,7 @@ This is a event system for the PHP Fat-free Framework. Here is what's included s
 * send payload and context data with an event
 * sub-events and event propagation
 * stop the event chain
-* works with F3 v3.5 and PHP v5.3
+* works with F3 v3.5 and PHP v5.4+
 
 ---
 
@@ -31,7 +31,7 @@ The Event class is a child of Prefab, so you can get it everywhere like this:
 
 ```php
 // fetch the global Event instance
-$events = \Event::instance();
+$events = \Sugar\Event::instance();
 ```
 
 Define a listener / hook:
@@ -165,7 +165,7 @@ to add the tests to your local F3 test-bench, add this:
 ```php
 // Event Tests
 $f3->concat('AUTOLOAD', ',path/to/f3-events/test/');
-\EventTests::init();
+\Sugar\EventTests::init();
 ```
 
 

@@ -13,7 +13,7 @@ class Case4 extends \App\Controller {
 
 	function get($f3) {
 
-		$events = \Event::instance();
+		$events = \Sugar\Event::instance();
 
 		$events->on('content',function($data,$context) {
 			echo $data;
@@ -22,7 +22,7 @@ class Case4 extends \App\Controller {
 		});
 		$events->on('content.render',function($data,$context) {
 			$out = '';
-			$event = \Event::instance();
+			$event = \Sugar\Event::instance();
 			foreach($data as $content)
 				$out.=$event->emit('build.content',$content);
 			return $out;

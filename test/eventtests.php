@@ -26,7 +26,7 @@ class EventTests extends \App\Controller {
 
 		$tests = new \Test();
 
-		$events = \Event::instance();
+		$events = \Sugar\Event::instance();
 
 		$tests->expect(true,'Events initiated');
 
@@ -206,10 +206,13 @@ class EventTests extends \App\Controller {
 		$events->watch($dumpy1)->on('get.name',function($val){
 			return ucfirst($val);
 		});
+		$events->watch($dumpy2)->on('get.name',function($val){
+			return strtoupper($val);
+		});
 
 		$tests->expect(
-			$dumpy1->getName() == 'Goofy' && $dumpy2->getName() == 'donald'
-			,'Add local event to a single object');
+			$dumpy1->getName() == 'Goofy' && $dumpy2->getName() == 'DONALD'
+			,'Add local event to single object');
 
 
 		$f3->set('results',$tests->results());
@@ -223,7 +226,7 @@ class Dumpy {
 
 	function __construct($name) {
 		$this->name = $name;
-		$this->events = \Event::instance()->watch($this);
+		$this->events = \Sugar\Event::instance()->watch($this);
 	}
 
 	function getName() {
