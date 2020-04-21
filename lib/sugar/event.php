@@ -12,8 +12,8 @@
  * Christian Knuth <ikkez0n3@gmail.com>
  * https://github.com/ikkez/F3-Sugar/
  *
- * @version 1.0.1
- * @date: 14.01.2020
+ * @version 1.0.2
+ * @date: 21.04.2020
  **/
 
 namespace Sugar;
@@ -100,7 +100,7 @@ class Event extends \Prefab {
 							$listeners = array_merge($listeners,array_values($e[$nkey]));
 					if ($listeners)
 						foreach ($listeners as $func) {
-							if (!is_array($func))
+							if (!is_array($func) || is_callable($func))
 								$func = [$func,[]];
 							$ev['options']=$func[1];
 							$out = $this->f3->call($func[0],[$args,&$context,$ev]);
@@ -144,7 +144,7 @@ class Event extends \Prefab {
 						$listeners = array_merge($listeners,array_values($e[$nkey]));
 				if ($listeners)
 					foreach ($listeners as $func) {
-						if (!is_array($func))
+						if (!is_array($func) || is_callable($func))
 							$func = [$func,[]];
 						$ev['options']=$func[1];
 						$out = $this->f3->call($func[0],[$args,&$context,$ev]);
