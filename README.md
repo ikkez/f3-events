@@ -43,6 +43,8 @@ $events->on('user_login', 'Notification->user_login');
 $events->on('user_login', function(){
   // ...
 });
+// or with callables
+$events->on('user_login', [$this,'method']); 
 ```
 
 Send an event:
