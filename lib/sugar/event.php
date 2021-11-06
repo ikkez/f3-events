@@ -8,12 +8,12 @@
  * compliance with the license. Any of the license terms and conditions
  * can be waived if you get permission from the copyright holder.
  *
- * Copyright (c) 2020 ~ ikkez
+ * Copyright (c) 2021 ~ ikkez
  * Christian Knuth <ikkez0n3@gmail.com>
  * https://github.com/ikkez/F3-Sugar/
  *
- * @version 1.0.2
- * @date: 21.04.2020
+ * @version 1.0.3
+ * @date: 06.11.2021
  **/
 
 namespace Sugar;
@@ -34,6 +34,13 @@ class Event extends \Prefab {
 			$this->ekey = 'EVENTS_local.'.spl_object_id($obj).'.';
 		else
 			$this->ekey = 'EVENTS.';
+	}
+
+	/**
+	 * clean-up on destruction, as spl_object_id could be reused
+	 */
+	public function __destruct() {
+		$this->f3->clear(rtrim($this->ekey,'.'));
 	}
 
 	/**

@@ -10,7 +10,7 @@ This is a event system for the PHP Fat-free Framework. Here is what's included s
 * send payload and context data with an event
 * sub-events and event propagation
 * stop the event chain
-* works with F3 v3.5 and PHP v5.4+
+* works with F3 v3.5 and PHP v7.2+
 
 ---
 
